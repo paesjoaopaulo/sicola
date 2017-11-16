@@ -1,4 +1,4 @@
-package app.controller;
+package controller;
 
 public abstract class Controller {
     

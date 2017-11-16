@@ -1,4 +1,4 @@
-package app.bean;
+package bean;
 
 public abstract class Bean {
     

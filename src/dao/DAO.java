@@ -1,4 +1,4 @@
-package app.dao;
+package dao;
 
 public abstract class DAO {
     
