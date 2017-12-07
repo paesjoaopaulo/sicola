@@ -1,45 +1,31 @@
 package DB;
 
-import bean.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Conexao {
 
-    private final String host;
-    private final String user;
-    private final String pass;
-    private final String port;
-    private final String dbnm;
-    private final String driver;
+    private static final String host = "localhost";
+    private static final String user = "root";
+    private static final String pass = "";
+    private static final String port = "3306";
+    private static final String dbnm = "aps_desktop";
+    private static final String driver = "jdbc:mysql://";
 
-    private Connection con;
+    private static Connection con;
 
-    public Conexao() {
-        this.host = "localhost";
-        this.user = "root";
-        this.pass = "123";
-        this.port = "3306";
-        this.dbnm = "lara";
-        this.driver = "jdbc:mysql://";
-    }
-
-    public void getInstance() {
-        this.con = null;
+    public static Connection getInstance() {
+        con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.con = DriverManager.getConnection(driver + host + "/" + dbnm, user, pass);
-            PreparedStatement st = this.con.prepareStatement("SELECT * FROM usuarios");
-            ResultSet res = st.executeQuery();
-            while(res.next()){
-                
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println(e.getMessage());
+            con = DriverManager.getConnection(driver + host + "/" + dbnm, user, pass);
+        } catch (SQLException e) {
+            System.err.println("Erro na conexão com a base de dados: " + e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.err.println("Classe não encontrada: " + ex.getMessage());
         }
+        return con;
     }
 
 }
